@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tabel Nama Driver Pembalap F1 Menggunakan API</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$.ajax({
+				url: "http://ergast.com/api/f1/drivers.json",
+				dataType: "jsonp",
+				jsonpCallback: "myParser",
+				success: function(data) {
+					console.log(data);
+					$.each(data.MRData.DriverTable.Drivers, function(i, driver) {
+						$("#driver-table").append("<tr><td>" + driver.driverId + "</td><td>" + driver.givenName + " " + driver.familyName + "</td><td>" + driver.dateOfBirth + "</td><td>" + driver.nationality + "</td></tr>");
+					});
+				}
+			});
+			
+			function myParser(data) {
+			}
+		});
+	</script>
+</head>
+<body>
+	<h1>Daftar Pembalap Formula 1</h1>
+	<table id="driver-table">
+		<thead>
+			<tr>
+				<th>ID Pembalap</th>
+				<th>Nama Lengkap</th>
+				<th>Tanggal Lahir</th>
+                <th>Kebangsaan</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</body>
+</html>
